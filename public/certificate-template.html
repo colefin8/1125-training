@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Awardo Frontend Puzzle Master Certificate</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            background: #DDDDDD;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            width: 25.7cm;
+            height: 16.2cm;
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .certificate {
+            margin: 0;
+            padding: 1cm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+
+        .title-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+        }
+
+        .achievement {
+            font-size: 16px;
+            margin: 25px 0;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            font-style: italic;
+        }
+
+        .secrets {
+            font-size: 11px;
+            color: #999;
+            margin-top: 15px;
+            font-family: monospace;
+        }
+
+        .perfect-score {
+            font-size: 14px;
+            color: #FFD700;
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            background: linear-gradient(45deg, #FFF8DC, #FFFACD);
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+        }
+
+        .perfect-score .crown {
+            font-size: 20px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate">
+        <div class="header">🏆 VERY OFFICIAL AWARDO CERTIFICATION 🏆</div>
+        <img src="./certificate-title.svg" alt="Frontend Puzzle Master" class="title-image" />
+        <div class="date">Completed on: {{DATE}}</div>
+        <div class="signature">
+            <small>Awardco Puzzle Challenge Certification Authority</small>
+        </div>
+        <div class="secrets">
+            Verification Secrets: {{SECRETS_COUNT}} collected
+        </div>
+        <div class="perfect-score" id="perfect-score" style="display: none;">
+            <span class="crown">👑</span>PERFECT SCORE ACHIEVED!<span class="crown">👑</span><br>
+            <small>All 6 hidden secrets discovered - True Disciple of Cole</small>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            const secretsText = document.querySelector('.secrets').textContent;
+            const secretsCount = parseInt(secretsText.match(/(\d+)/)[1]);
+
+            if (secretsCount === 6) {
+                document.getElementById('perfect-score').style.display = 'block';
+            }
+
+            setTimeout(function () {
+                window.print();
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
