@@ -352,7 +352,7 @@ onMounted(async () => {
     <header class="header">
       <div class="header-content">
         <h1>
-          <PhPuzzlePiece class="inline-icon" /> <span>Frontend Developer Puzzle Challenge</span>
+          <PhPuzzlePiece class="inline-icon" /> <span>Frontend Puzzle Challenge</span>
         </h1>
         <button @click="resetGame" class="reset-btn" title="Reset Challenge">
           <PhArrowCounterClockwise class="inline-icon" /> Reset
@@ -363,7 +363,7 @@ onMounted(async () => {
         <span>Secrets Found: {{ secretsCount }}</span>
       </div>
       <span v-if="allLevelsCompleted" class="stats crown">
-        <PhCrown class="inline-icon" /> MASTER DEVELOPER
+        <PhCrown class="inline-icon" /> MASTER FRONTEND
         <PhCrown class="inline-icon" />
       </span>
 
@@ -376,6 +376,7 @@ onMounted(async () => {
     <div v-if="!gameStarted" class="start-screen">
       <h2>Ready to test your frontend skills?</h2>
       <p>Click the button below to begin the challenge!</p>
+      <p><strong>All puzzles can be solved using the in-browser console</strong></p>
       <button @click="startGame" class="start-btn">Start Challenge</button>
     </div>
 

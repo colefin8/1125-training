@@ -77,7 +77,7 @@ const pdf = async (currentDate: string, secretsCount: number): Promise<string> =
     <img src="./certificate-title.svg" alt="Frontend Puzzle Master" class="title-image" />
     <div class="achievement">
       This certifies that the bearer has successfully completed all challenges
-      in the Awardo Frontend Developer Puzzle Challenge, demonstrating mastery of:
+      in the Awardo Frontend Puzzle Challenge, demonstrating mastery of:
       <br><br>
       • DOM Inspection & Manipulation<br>
       • CSS Selector Expertise<br>
