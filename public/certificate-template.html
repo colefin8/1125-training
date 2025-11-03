@@ -7,6 +7,12 @@
         @page {
             size: A4 landscape;
             margin: 2cm;
+            @top-left { content: ""; }
+            @top-center { content: ""; }
+            @top-right { content: ""; }
+            @bottom-left { content: ""; }
+            @bottom-center { content: ""; }
+            @bottom-right { content: ""; }
         }
 
         body {
@@ -62,13 +68,6 @@
             margin-top: 30px;
         }
 
-        .signature {
-            margin-top: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 15px;
-            font-style: italic;
-        }
-
         .secrets {
             font-size: 11px;
             color: #999;
@@ -92,6 +91,13 @@
             font-size: 20px;
             margin: 0 5px;
         }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
     </style>
 </head>
 
@@ -100,9 +106,6 @@
         <div class="header">🏆 VERY OFFICIAL AWARDO CERTIFICATION 🏆</div>
         <img src="./certificate-title.svg" alt="Frontend Puzzle Master" class="title-image" />
         <div class="date">Completed on: {{DATE}}</div>
-        <div class="signature">
-            <small>Awardco Puzzle Challenge Certification Authority</small>
-        </div>
         <div class="secrets">
             Secrets Verified: {{SECRETS_COUNT}} collected
         </div>

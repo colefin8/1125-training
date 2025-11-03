@@ -23,6 +23,7 @@ import pdf from './pdf.ts'
 
 const currentLevel = ref(-1)
 const unlockedLevels = ref([0])
+const playerName = ref('')
 const gameStarted = ref(false)
 const secrets = ref<string[]>([])
 const showHint = ref(false)
@@ -56,6 +57,7 @@ const saveGameState = () => {
   const gameState = {
     currentLevel: currentLevel.value,
     unlockedLevels: unlockedLevels.value,
+    playerName: playerName.value,
     gameStarted: gameStarted.value,
     secrets: secrets.value,
     completedLevels: levels.map(level => level.completed.value),
@@ -72,6 +74,7 @@ const loadGameState = () => {
       const gameState = JSON.parse(savedState)
       currentLevel.value = gameState.currentLevel || -1
       unlockedLevels.value = gameState.unlockedLevels || [0]
+      playerName.value = gameState.playerName || ''
       gameStarted.value = gameState.gameStarted || false
       secrets.value = gameState.secrets || []
 
@@ -139,9 +142,11 @@ const generateLevelSecret = (levelId: number) => {
 }
 
 const startGame = () => {
-  currentLevel.value++;
-  gameStarted.value = true
-  addToConsole("Welcome! Let the challenges begin...")
+  if (playerName.value.trim()) {
+    currentLevel.value++;
+    gameStarted.value = true
+    addToConsole(`Welcome ${playerName.value}! Let the challenges begin...`)
+  }
 }
 
 const addToConsole = (message: string) => {
@@ -218,7 +223,7 @@ const generateCertificate = async () => {
     const currentDate = new Date().toLocaleDateString()
 
     try {
-      const htmlContent = await pdf(currentDate, secrets.value.length);
+      const htmlContent = await pdf(currentDate, secrets.value.length, playerName.value);
       certWindow.document.write(htmlContent)
       certWindow.document.close()
     } catch (error) {
@@ -375,9 +380,16 @@ onMounted(async () => {
 
     <div v-if="!gameStarted" class="start-screen">
       <h2>Ready to test your frontend skills?</h2>
-      <p>Click the button below to begin the challenge!</p>
+      <p>Enter your developer name to begin the challenge:</p>
+      <input 
+        v-model="playerName" 
+        @keyup.enter="startGame"
+        placeholder="Enter your name" 
+        class="name-input"
+        maxlength="50"
+      />
       <p><strong>All puzzles can be solved using the in-browser console</strong></p>
-      <button @click="startGame" class="start-btn">Start Challenge</button>
+      <button @click="startGame" :disabled="!playerName.trim()" class="start-btn">Start Challenge</button>
     </div>
 
     <div v-else class="game-container">
@@ -483,6 +495,24 @@ onMounted(async () => {
 .reset-btn:hover {
   background: #ff3742 !important;
   transform: translateY(-1px);
+}
+
+.name-input {
+  padding: 15px;
+  font-size: 18px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
 }
 
 .start-btn {

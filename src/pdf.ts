@@ -1,10 +1,11 @@
-const pdf = async (currentDate: string, secretsCount: number): Promise<string> => {
+const pdf = async (currentDate: string, secretsCount: number, playerName: string): Promise<string> => {
     try {
         const response = await fetch('./certificate-template.html');
         let html = await response.text();
         
         html = html.replace('{{DATE}}', currentDate);
         html = html.replace('{{SECRETS_COUNT}}', secretsCount.toString());
+        html = html.replace('{{NAME}}', playerName);
         
         return html;
     } catch (error) {
